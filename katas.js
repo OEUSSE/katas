@@ -25,29 +25,25 @@ console.log(
 **/
 
 function validate(cardNumber) {
-  let strNumber = cardNumber.toString(),
+  cardNumber = cardNumber.toString().split('').map(Number).reverse(),
     duplicate = [],
     sumTotal = 0,
     numCheck = 0,
     count = 0;
 
-  (function duplicateParNumber() {
-    for (let i = strNumber.length; i > 0; i--) {
-      let number = +strNumber.charAt(i - 1)
-      count++
-      if (count % 2 === 0) {
-        let num = sumParDidigt(number * 2)
-        duplicate.push(num)
-        continue
-      }
-      duplicate.push(number)
+  for (let i = cardNumber.length; i > 0; i--) {
+    let number = cardNumber[i]
+    count++
+    if (count % 2 === 0) {
+      let num = sumParDidigt(number * 2)
+      duplicate.push(num)
+      continue
     }
-    return duplicate
-  })().reverse()
+  }
 
   function sumParDidigt(num) {
     num = num.toString()
-    return (num.length > 1) ? num.split('').reduce((a, b) => (+a) + (+b)) : +num
+    return (num.length > 1) ? num.split('').reduce((a, b) => a + b) : num
   }
 
   sumTotal = duplicate.reduce((a, b) => a + b)
