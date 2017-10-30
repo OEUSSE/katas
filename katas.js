@@ -25,34 +25,52 @@ console.log(
 **/
 
 function validate(cardNumber) {
-  cardNumber = cardNumber.toString().split('').map(Number).reverse(),
-    duplicate = [],
-    sumTotal = 0,
-    numCheck = 0,
-    count = 0;
+  var sum = 0;
 
-  for (let i = cardNumber.length; i > 0; i--) {
-    let number = cardNumber[i]
-    count++
-    if (count % 2 === 0) {
-      let num = sumParDidigt(number * 2)
-      duplicate.push(num)
-      continue
+  while (cardNumber > 0) {
+    var a = cardNumber % 10; // Almacena el último dígito
+    cardNumber = Math.floor(cardNumber / 10); // Corta el último dígito
+
+    var b = (cardNumber % 10) * 2; // Almacena el último dígo y lo multiplica por dos
+    cardNumber = Math.floor(cardNumber / 10); // Corta el último dígito
+
+    if (b > 9) { // Verifica si el digito para (b) tiene mas de dos dígitos
+      b -= 9; // Suma los dos dígitos que conforma b
     }
+
+    sum += a + b; // Sumatoria de dígitos
   }
 
-  function sumParDidigt(num) {
-    num = num.toString()
-    return (num.length > 1) ? num.split('').reduce((a, b) => a + b) : num
-  }
-
-  sumTotal = duplicate.reduce((a, b) => a + b)
-  // Next check digit
-  numCheck = (sumTotal - (sumTotal % 10))
-  // Luhn checksum mod 10
-  return (sumTotal % 10 === 0)
+  return sum % 10 == 0; // Si es valido o no
 }
 
 console.log(
   validate(51684768131351)
 )
+
+/**
+ *
+ * function validate(cardNumber) {
+  var sum = 0;
+
+  while (cardNumber > 0) {
+    var a = cardNumber % 10; // Almacena el último dígito
+    cardNumber = Math.floor(cardNumber / 10); // Corta el último dígito
+
+    var b = (cardNumber % 10) * 2; // Almacena el último dígo y lo multiplica por dos
+    cardNumber = Math.floor(cardNumber / 10); // Corta el último dígito
+
+    if (b > 9) { // Verifica si el digito para (b) tiene mas de dos dígitos
+      b -= 9; // Suma los dos dígitos que conforma b
+    }
+
+    sum += a + b; // Sumatoria de dígitos
+  }
+
+  return sum % 10 == 0; // Si es valido o no
+}
+
+console.log(
+  validate(4894210001083290)
+)
+ */
