@@ -47,30 +47,3 @@ function validate(cardNumber) {
 console.log(
   validate(51684768131351)
 )
-
-/**
- *
- * function validate(cardNumber) {
-  var sum = 0;
-
-  while (cardNumber > 0) {
-    var a = cardNumber % 10; // Almacena el último dígito
-    cardNumber = Math.floor(cardNumber / 10); // Corta el último dígito
-
-    var b = (cardNumber % 10) * 2; // Almacena el último dígo y lo multiplica por dos
-    cardNumber = Math.floor(cardNumber / 10); // Corta el último dígito
-
-    if (b > 9) { // Verifica si el digito para (b) tiene mas de dos dígitos
-      b -= 9; // Suma los dos dígitos que conforma b
-    }
-
-    sum += a + b; // Sumatoria de dígitos
-  }
-
-  return sum % 10 == 0; // Si es valido o no
-}
-
-console.log(
-  validate(4894210001083290)
-)
- */
