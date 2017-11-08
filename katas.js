@@ -55,13 +55,7 @@ console.log(
  */
 
 function isAlternate(word) {
-  const regex = /[aeiou]/i;
-  const isLikeStart = regex.test(word[0]);
-  return word.split('').length > 0 && word.split('').every((item, i) => {
-    if (i % 2 === 0 && (regex.test(item) === isLikeStart)) return true;
-    else if (i % 2 !== 0 && (regex.test(item) === !isLikeStart)) return true;
-    else return false;
-  });
+  return !/[aeiou]{2}|[^aeiou]{2}/.test(word);
 }
 
 console.log(
