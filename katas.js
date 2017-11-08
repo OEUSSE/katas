@@ -47,3 +47,23 @@ function validate(cardNumber) {
 console.log(
   validate(51684768131351)
 )
+
+/**
+ * Are we alternate?
+ * @param {String} word 
+ * Return true or false if vocal and consonants are in alternate order.
+ */
+
+function isAlternate(word) {
+  const regex = /[aeiou]/i;
+  const isLikeStart = regex.test(word[0]);
+  return word.split('').length > 0 && word.split('').every((item, i) => {
+    if (i % 2 === 0 && (regex.test(item) === isLikeStart)) return true;
+    else if (i % 2 !== 0 && (regex.test(item) === !isLikeStart)) return true;
+    else return false;
+  });
+}
+
+console.log(
+  isAlternate('aloha')
+)
