@@ -10,9 +10,7 @@ function uniqueInOrder(iterable) {
   })
 }
 
-console.log(
-  uniqueInOrder('AAAABBBCCDAABBB')
-)
+// uniqueInOrder('AAAABBBCCDAABBB')
 
 /**
  * Validate Credit Card Number
@@ -44,9 +42,7 @@ function validate(cardNumber) {
   return sum % 10 == 0; // Si es valido o no
 }
 
-console.log(
-  validate(51684768131351)
-)
+// validate(51684768131351)
 
 /**
  * Are we alternate?
@@ -64,6 +60,18 @@ function isAlternate(word) {
   });
 }
 
-console.log(
-  isAlternate('aloha')
-)
+// isAlternate('aloha')
+
+/**
+ * Generate a Hashtag
+ * @param {String} str 
+ */
+function generateHashtag(str) {
+  return str.length > 0 && str.length <= 140 &&
+    str
+      .trim()
+      .split(' ')
+      .reduce((str, word) => str += `${word[0].toUpperCase().concat(word.slice(1, word.length))}`, '#')
+}
+
+// generateHashtag('this is a hashtag')
