@@ -75,3 +75,19 @@ function generateHashtag(str) {
 }
 
 // generateHashtag('this is a hashtag')
+
+/**
+ * Count characters in your string
+ * @param {String} string
+ */
+
+function count(string) {
+  let countCharacter;
+  return string.split('').reduce((obj, letter, index) => {
+    obj.hasOwnProperty(letter) ? countCharacter++ : countCharacter = 1;
+    obj[letter] = countCharacter;
+    return obj;
+  }, {});
+}
+
+// ('avanico') => { a: 2, v: 1, n: 1, i: 1, c: 1, o: 1 }
