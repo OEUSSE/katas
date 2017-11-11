@@ -24,7 +24,6 @@ function uniqueInOrder(iterable) {
 
 function validate(cardNumber) {
   var sum = 0;
-
   while (cardNumber > 0) {
     var a = cardNumber % 10; // Almacena el último dígito
     cardNumber = Math.floor(cardNumber / 10); // Corta el último dígito
@@ -35,10 +34,8 @@ function validate(cardNumber) {
     if (b > 9) { // Verifica si el digito para (b) tiene mas de dos dígitos
       b -= 9; // Suma los dos dígitos que conforma b
     }
-
     sum += a + b; // Sumatoria de dígitos
   }
-
   return sum % 10 == 0; // Si es valido o no
 }
 
@@ -88,5 +85,5 @@ function count(string) {
   }, {});
 }
 
-console.log(count('avanico'))// => { a: 2, v: 1, n: 1, i: 1, c: 1, o: 1 }
+//count('avanico')) => { a: 2, v: 1, n: 1, i: 1, c: 1, o: 1 }
 
