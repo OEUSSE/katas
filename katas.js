@@ -83,10 +83,10 @@ function generateHashtag(str) {
 
 function count(string) {
   return string.split('').reduce((obj, letter, index) => {
-    obj.hasOwnProperty(letter) ? obj[letter]++ : obj[letter] = 1;
+    obj[letter] ? obj[letter]++ : obj[letter] = 1;
     return obj;
   }, {});
 }
 
-//count('avanico')) => { a: 2, v: 1, n: 1, i: 1, c: 1, o: 1 }
+console.log(count('avanico'))// => { a: 2, v: 1, n: 1, i: 1, c: 1, o: 1 }
 
