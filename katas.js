@@ -1,6 +1,6 @@
 /**
  * Unique In Order
- * @param {*} iterable 
+ * @param {*} iterable
  * return a unique order
  */
 
@@ -14,7 +14,7 @@ function uniqueInOrder(iterable) {
 
 /**
  * Validate Credit Card Number
- * @param {*} cardNumber 
+ * @param {*} cardNumber
  * Validate implement the Luhn Algorithm.
  * How it works?!
   - cada numero par multiplicarlo por 2
@@ -43,7 +43,7 @@ function validate(cardNumber) {
 
 /**
  * Are we alternate?
- * @param {String} word 
+ * @param {String} word
  * Return true or false if vocal and consonants are in alternate order.
  */
 
@@ -61,7 +61,7 @@ function isAlternate(word) {
 
 /**
  * Generate a Hashtag
- * @param {String} str 
+ * @param {String} str
  */
 function generateHashtag(str) {
   return str.length > 0 && str.length <= 140 &&
@@ -86,4 +86,59 @@ function count(string) {
 }
 
 //count('avanico')) => { a: 2, v: 1, n: 1, i: 1, c: 1, o: 1 }
+
+/**
+ * @name No repeats please, permAlone
+ * @param {String} str
+ * @description
+ * Este algoritmo se basa en permutaciones.
+ * Las permutaciones son la cantidad de variaciones que puede tener un grupo.
+ * @return Este algoritmo crea todas la posibles variaciones de un string y devuelve el
+ * número de variaciones en las que dos letras no van seguidas una de la otra.
+ * aab(👎) - aba(👍)
+ */
+
+function permAlone(str) {
+  const r = str.length;
+  const nPr = fact(str.length) / fact(str.length - r);
+  const rows = nPr;
+  let variants = getVariants(str);
+
+  return variants;
+
+  function getVariants(str) {
+    let count = 0;
+    let v = getBase(rows);
+    let p = getBase(rows);
+
+    for (let i = 0, x = r; i < x; i++) {
+      if (v[0].includes(count))
+        count++;
+      for (let y = 0, z = v.length; y < z; y++) {
+        v[y].push(count)
+        p[y].push(str[count]);
+        if (count === r - 1)
+          count = 0;
+        else count++;
+      }
+    }
+    return p;
+  }
+
+  function getBase(rows) {
+    let b = [];
+    for (let i = 0, x = rows; i < x; i++)
+      b.push([]);
+    return b;
+  }
+
+  function fact(num) {
+    if (num < 1) return 1;
+    return fact(num - 1) * num;
+  }
+}
+
+/*console.log(
+  permAlone("aab")
+)*/
 
