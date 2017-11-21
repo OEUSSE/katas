@@ -99,43 +99,18 @@ function count(string) {
  */
 
 function permAlone(str) {
-  const r = str.length;
-  const nPr = fact(str.length) / fact(str.length - r);
-  const rows = nPr;
-  let variants = getVariants(str);
-
-  return variants;
-
-  function getVariants(str) {
-    let count = 0;
-    let v = getBase(rows);
-    let p = getBase(rows);
-
-    for (let i = 0, x = r; i < x; i++) {
-      if (v[0].includes(count))
-        count++;
-      for (let y = 0, z = v.length; y < z; y++) {
-        v[y].push(count)
-        p[y].push(str[count]);
-        if (count === r - 1)
-          count = 0;
-        else count++;
+  const re = /(.)\1/;
+  function pT(p, o) {
+    if (o.length) {
+      let sum = 0;
+      for (var i = 0; i < p.length + 1; i++) {
+        sum += pT(p.slice(0, i).concat(o[0]).concat(p.slice(i)), o.slice(1));
       }
+      return sum;
     }
-    return p;
+    else return !re.test(p.join(''));
   }
-
-  function getBase(rows) {
-    let b = [];
-    for (let i = 0, x = rows; i < x; i++)
-      b.push([]);
-    return b;
-  }
-
-  function fact(num) {
-    if (num < 1) return 1;
-    return fact(num - 1) * num;
-  }
+  return pT([], str.split(''));
 }
 
 /*console.log(
