@@ -117,3 +117,21 @@ function permAlone(str) {
   permAlone("aab")
 )*/
 
+/**
+ * Count the smiley faces!
+ * @param {Array} arr
+ * @description
+ * Valid smiley face examples :) :D ;-D :~)
+ * Invalid smiley faces ;( :> :} :]
+ */
+
+function countSmileys(arr) {
+  const regex = /((:|;)(-|~|)([)]|D))/;
+  return arr.filter(x => regex.test(x)).length;
+}
+
+console.log(
+  countSmileys(
+    [';]', ':[', ';*', ':$', ';-D']
+  )
+)
