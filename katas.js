@@ -135,3 +135,21 @@ console.log(
     [';]', ':[', ';*', ':$', ';-D']
   )
 )
+
+/**
+* Prefill an Array
+* @param {String or Number} quantity
+* @param {String, Number, Func} base
+*/
+
+function prefill(quantity, base) {
+  // (~~) Sustitute of Math.floor() -> Javascript Bitwise Opertors
+  if (typeof quantity === 'boolean' || ~~quantity != quantity || +quantity < 0)
+    throw new TypeError(quantity + ' is invalid');
+
+  return Array.apply(null, Array(+quantity)).map(() => base);
+}
+
+/*console.log(
+  prefill(2, prefill(2, '2d'))
+)*/
