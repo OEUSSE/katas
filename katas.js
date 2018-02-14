@@ -2,6 +2,8 @@
  * Unique In Order
  * @param {*} iterable
  * return a unique order
+ * @description
+ * uniqueInOrder('AAAABBBCCDAABBB')
  */
 
 function uniqueInOrder(iterable) {
@@ -9,8 +11,6 @@ function uniqueInOrder(iterable) {
     return iterable[i - 1] !== a
   })
 }
-
-// uniqueInOrder('AAAABBBCCDAABBB')
 
 /**
  * Validate Credit Card Number
@@ -20,6 +20,7 @@ function uniqueInOrder(iterable) {
   - cada numero par multiplicarlo por 2
   - sumar entre si los digitos pares -> 18 = 1 + 8 = 9
   - sumar todo los numeros y la suma del resultado por modulo 10, si da 0 es valido si no, no.
+  validate(51684768131351)
 **/
 
 function validate(cardNumber) {
@@ -39,12 +40,12 @@ function validate(cardNumber) {
   return sum % 10 == 0; // Si es valido o no
 }
 
-// validate(51684768131351)
-
 /**
  * Are we alternate?
  * @param {String} word
  * Return true or false if vocal and consonants are in alternate order.
+ * @description
+ * isAlternate('aloha')
  */
 
 function isAlternate(word) {
@@ -57,12 +58,13 @@ function isAlternate(word) {
   });
 }
 
-// isAlternate('aloha')
-
 /**
  * Generate a Hashtag
  * @param {String} str
+ * @description
+ * generateHashtag('this is a hashtag')
  */
+
 function generateHashtag(str) {
   return str.length > 0 && str.length <= 140 &&
     str
@@ -71,11 +73,11 @@ function generateHashtag(str) {
       .reduce((str, word) => str += `${word[0].toUpperCase().concat(word.slice(1, word.length))}`, '#')
 }
 
-// generateHashtag('this is a hashtag')
-
 /**
  * Count characters in your string
  * @param {String} string
+ * @description
+ * count('avanico')) => { a: 2, v: 1, n: 1, i: 1, c: 1, o: 1 }
  */
 
 function count(string) {
@@ -84,8 +86,6 @@ function count(string) {
     return obj;
   }, {});
 }
-
-//count('avanico')) => { a: 2, v: 1, n: 1, i: 1, c: 1, o: 1 }
 
 /**
  * @name No repeats please, permAlone
@@ -96,6 +96,7 @@ function count(string) {
  * @return Este algoritmo crea todas la posibles variaciones de un string y devuelve el
  * número de variaciones en las que dos letras no van seguidas una de la otra.
  * aab(👎) - aba(👍)
+ * permAlone("aab")
  */
 
 function permAlone(str) {
@@ -113,16 +114,13 @@ function permAlone(str) {
   return pT([], str.split(''));
 }
 
-/*console.log(
-  permAlone("aab")
-)*/
-
 /**
  * Count the smiley faces!
  * @param {Array} arr
  * @description
  * Valid smiley face examples :) :D ;-D :~)
  * Invalid smiley faces ;( :> :} :]
+ * countSmileys( [';]', ':[', ';*', ':$', ';-D'] )
  */
 
 function countSmileys(arr) {
@@ -130,16 +128,11 @@ function countSmileys(arr) {
   return arr.filter(x => regex.test(x)).length;
 }
 
-console.log(
-  countSmileys(
-    [';]', ':[', ';*', ':$', ';-D']
-  )
-)
-
 /**
 * Prefill an Array
 * @param {String or Number} quantity
 * @param {String, Number, Func} base
+* @description prefill(2, prefill(2, '2d'))
 */
 
 function prefill(quantity, base) {
@@ -150,6 +143,36 @@ function prefill(quantity, base) {
   return Array.apply(null, Array(+quantity)).map(() => base);
 }
 
-/*console.log(
-  prefill(2, prefill(2, '2d'))
-)*/
+/**
+ * Dependency Injection
+*/
+
+const deps = {
+  'dep1': function () { return 'this is dep1'; },
+  'dep2': function () { return 'this is dep2'; },
+  'dep3': function () { return 'this is dep3'; },
+  'dep4': function () { return 'this is dep4'; }
+}
+
+const DI = function (dependency) {
+  this.dependency = dependency
+}
+
+DI.prototype.inject = function (func) {
+  let deps = /^[^(]+\(([^)]+)/.exec(func.toString());
+  deps = deps ? deps[1]
+    .split(/\s?,\s?/)
+    .map(function (dep) {
+      return this.dependency[dep];
+    }.bind(this)) : [];
+
+  return func.bind(null, ...deps)
+}
+
+let di = new DI(deps)
+
+const myFunc = di.inject(function (dep2, dep1, dep3) {
+  return [dep1(), dep2(), dep3()].join(' -> ');
+})
+
+let a = myFunc();
