@@ -1,4 +1,31 @@
 /**
+ * ROT13
+ */
+
+function parseToROT13(string) {
+  const isMin = (charCode) => charCode >= 97 && charCode <= 122
+  const isMax = (charCode) => charCode >= 65 && charCode <= 90
+
+  const getLetterCipher = (charCode, max, min) => {
+    let rotCode = charCode - 13
+    if (rotCode < min) {
+      let res = min - rotCode
+      rotCode = max - (res - 1);
+    }
+    return String.fromCharCode(rotCode)
+  }
+
+  return string.split('').reduce((accu, next) => {
+    const charCode = next.charCodeAt()
+    return accu += isMin(charCode) ?
+      getLetterCipher(charCode, 122, 97) :
+      isMax(charCode) ?
+      getLetterCipher(charCode, 90, 65) :
+      next
+  }, '')
+}
+
+/**
  * Unique In Order
  * @param {*} iterable
  * return a unique order
