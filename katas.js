@@ -203,3 +203,15 @@ const myFunc = di.inject(function (dep2, dep1, dep3) {
 })
 
 let a = myFunc();
+
+/**
+ * Reverse an integer
+ * @param {Integer} x 
+ */
+function reverseInteger(x) {
+  let integer = /\d+/g.exec(x.toString())[0]
+  let reverse = integer.split('').reverse().join('')
+  return parseInt(x.toString().replace(/\d+/g, reverse))
+}
+
+let res = reverseInteger(12345)
