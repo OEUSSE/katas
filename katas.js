@@ -1,4 +1,15 @@
 /**
+ * Chunk an array
+ * @param {*} string 
+ */
+function chunkArray(array, size) {
+  let chunks = []
+  for (let i = 0, x = array.length; i < x; i += size)
+      chunks.push(array.slice(i, i + size))
+  return chunks
+}
+
+/**
  * ROT13
  */
 
