@@ -241,23 +241,5 @@ const generate = length => {
  * @param p probability
 */
 const mutate = (chromosome, p) => {
-  const probability = Math.round(chromosome.length * p)
-  const random = () => Math.floor(Math.random() * (chromosome.length - 0)) + 0
-  const mutateChromosome = chromosome.split('')
-
-  if (probability) {
-      let will = []
-      while (will.length <= probability - 1) {
-          let rand = random()
-          if (!will.includes(rand)) will.push(rand)
-      }
-      
-      for (let i = 0, x = chromosome.length; i < x; i++) {
-          if (will.includes(i)) {
-              mutateChromosome[i] = mutateChromosome[i] == 1 ? 0 : 1
-          }
-      }
-  }
-
-  return mutateChromosome.join('')
+  return chromosome.split('').reduce((acc, v, i) => acc += Math.random() <= p ? v ^ 1 : v, '')
 }
