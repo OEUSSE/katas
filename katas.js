@@ -295,3 +295,21 @@ const mapPopulationFit = (population, fitness) => {
 
 let result = mapPopulationFit(population, fitness);
 a = result[0].fitness
+
+
+/**
+ * Generic Algorithm Series: #5 Roulette wheel selection
+ * @param population
+ * @param fitnesses
+*/
+const select = (population, fitnesses) => {
+  const p = Math.random();
+  let i =  -1;
+  let ac = 0;
+
+  do {
+      ac += fitnesses[++i];
+  } while(ac < p)
+
+  return population[i];
+}
