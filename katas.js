@@ -313,3 +313,40 @@ const select = (population, fitnesses) => {
 
   return population[i];
 }
+
+/**
+ * Chainable methods
+ * Born to be chained kata
+ */
+function sum(x, y) {
+  return x + y;
+}
+
+function double(x) {
+  return sum(x, x);
+}
+
+function minus (x, y) {
+  return x - y;
+}
+
+function addOne(x) {
+  return sum(x, 1);
+}
+
+function chain (fns) {
+  const Chainable = function (val) {
+      this.execute = () => val
+  }
+
+  for (let i in fns) Chainable.prototype[i] = function (a, b) {
+      const val = this.execute(),
+          args = !val ? [a, b] : [val, a]
+      return new Chainable(fns[i](...args))
+  }
+
+  return new Chainable(null)
+}
+
+let chainFn = chain({ sum, minus, double, addOne })
+let c1 = chainFn.sum(4,5).execute()
